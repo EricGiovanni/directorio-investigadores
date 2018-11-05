@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_campus',
         as: 'campus',
     });
-    Instituto.hasMany(models.Investigador, {
+    Instituto.belongsToMany(models.Investigador, {
         through: models.InstitutoInvestigador,
         foreignKey: 'id_instituto',
         as: 'investigadores',

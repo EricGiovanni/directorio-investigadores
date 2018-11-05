@@ -23,6 +23,7 @@ module.exports = {
       correo_electronico: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       contrasena: {
         type: Sequelize.STRING,
