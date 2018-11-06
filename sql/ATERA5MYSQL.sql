@@ -71,15 +71,14 @@ CREATE TABLE `Instituto` (
 	PRIMARY KEY (`id_instituto`)
 );
 
-CREATE TABLE `Usuario` (
-	`id_usuario` INT NOT NULL AUTO_INCREMENT,
-	`nombre_usuario` varchar NOT NULL,
-	`apellido_paterno` varchar NOT NULL,
-	`apellido_materno` varchar NOT NULL,
+CREATE TABLE `Persona` (
+	`id_persona` INT NOT NULL AUTO_INCREMENT,
+	`nombres_persona` varchar NOT NULL,
+	`apellidos` varchar NOT NULL,
 	`password` varchar NOT NULL,
 	`aprobado` BOOLEAN NOT NULL,
 	`email` varchar NOT NULL UNIQUE,
-	PRIMARY KEY (`id_usuario`)
+	PRIMARY KEY (`id_persona`)
 );
 
 CREATE TABLE `Telefono_Usuario` (
@@ -179,9 +178,9 @@ ALTER TABLE `Dpto_Facultad` ADD CONSTRAINT `Dpto_Facultad_fk0` FOREIGN KEY (`id_
 
 ALTER TABLE `Instituto` ADD CONSTRAINT `Instituto_fk0` FOREIGN KEY (`id_campus`) REFERENCES `Campus`(`id_campus`);
 
-ALTER TABLE `Telefono_Usuario` ADD CONSTRAINT `Telefono_Usuario_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario`(`id_usuario`);
+ALTER TABLE `Telefono_Usuario` ADD CONSTRAINT `Telefono_Usuario_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Persona`(`id_persona`);
 
-ALTER TABLE `Investigador` ADD CONSTRAINT `Investigador_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario`(`id_usuario`);
+ALTER TABLE `Investigador` ADD CONSTRAINT `Investigador_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Persona`(`id_persona`);
 
 ALTER TABLE `Investigador_Trabaja_Instituto` ADD CONSTRAINT `Investigador_Trabaja_Instituto_fk0` FOREIGN KEY (`id_investigador`) REFERENCES `Investigador`(`id_investigador`);
 
@@ -191,7 +190,7 @@ ALTER TABLE `Investigador_Trabaja_Dpto_Fac` ADD CONSTRAINT `Investigador_Trabaja
 
 ALTER TABLE `Investigador_Trabaja_Dpto_Fac` ADD CONSTRAINT `Investigador_Trabaja_Dpto_Fac_fk1` FOREIGN KEY (`id_dpto_fac`) REFERENCES `Dpto_Facultad`(`id_dpto_fac`);
 
-ALTER TABLE `Coautor` ADD CONSTRAINT `Coautor_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario`(`id_usuario`);
+ALTER TABLE `Coautor` ADD CONSTRAINT `Coautor_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Persona`(`id_persona`);
 
 ALTER TABLE `Publicar_articulo` ADD CONSTRAINT `Publicar_articulo_fk0` FOREIGN KEY (`id_investigador`) REFERENCES `Investigador`(`id_investigador`);
 
@@ -201,11 +200,11 @@ ALTER TABLE `Ser_Coautor_articulo` ADD CONSTRAINT `Ser_Coautor_articulo_fk0` FOR
 
 ALTER TABLE `Ser_Coautor_articulo` ADD CONSTRAINT `Ser_Coautor_articulo_fk1` FOREIGN KEY (`id_coautor`) REFERENCES `Coautor`(`id_coautor`);
 
-ALTER TABLE `Alumno` ADD CONSTRAINT `Alumno_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario`(`id_usuario`);
+ALTER TABLE `Alumno` ADD CONSTRAINT `Alumno_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Persona`(`id_persona`);
 
 ALTER TABLE `Alumno_Trabaja_Investigador` ADD CONSTRAINT `Alumno_Trabaja_Investigador_fk0` FOREIGN KEY (`id_alumno`) REFERENCES `Alumno`(`id_alumno`);
 
 ALTER TABLE `Alumno_Trabaja_Investigador` ADD CONSTRAINT `Alumno_Trabaja_Investigador_fk1` FOREIGN KEY (`id_investigador`) REFERENCES `Investigador`(`id_investigador`);
 
-ALTER TABLE `Administrador` ADD CONSTRAINT `Administrador_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario`(`id_usuario`);
+ALTER TABLE `Administrador` ADD CONSTRAINT `Administrador_fk0` FOREIGN KEY (`id_usuario`) REFERENCES `Persona`(`id_persona`);
 
