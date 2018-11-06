@@ -1,22 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var db = require("../models/index");
-const Persona = require('../models/persona')(db.sequelize, db.Sequelize);
+var personasRouter = require("../controllers/personas.js");
 
-router.get('/:personaId', function(req, res, next) {
-    return Persona
-        .findByPk(req.params.personaId)
-        .then(persona => {
-            if (!persona) {
-                return res.status(404).send({
-                    message: 'Persona no encontrada',
-                });
-            }
-            else {
-                return res.status(200).send(persona);
-            }
-        })
-        .catch(error => res.status(400).send(error));
-});
+router.get('/', personasRouter.list);
+router.post('/', personasRouter.create);
+router.put('/:personaId', personasRouter.update);
+router.delete('/:personaId', personasRouter.delete);
 
 module.exports = router;
