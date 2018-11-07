@@ -1,5 +1,21 @@
+import mixins
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container-fluid
+    nav.navbar.navbar-expand-lg.bg-light.navbar-light
+      a.navbar-brand(href="#")  ATERA5
+      button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse(id="navbarNav")
+        ul.navbar-nav
+          li.nav-item.active
+            a.nav-link(href='#') Home 
+              span.sr-only (current)
+          li.nav-item
+            a.nav-link(href='#') Perfil
+          li.nav-item.dropdown 
+            a.nav-link.dropdown-toggle(href='#' id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Menu
+            .dropdown-menu(aria-labelledby="navbarDropdownMenuLink")
+              a.dropdown-item(href='#') Algo
+  
