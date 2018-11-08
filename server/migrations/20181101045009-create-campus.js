@@ -11,15 +11,14 @@ module.exports = {
       nombre: {
         type: Sequelize.STRING
       },
-      estado: {
-        type: Sequelize.STRING
-      },
-      municipio: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
+      id_estado: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.DATE
+        foreignKey: true,
+        references: {
+            model: 'Estados',
+            key: 'id',
+        },
       },
       id_institucion: {
         type: Sequelize.INTEGER,
@@ -29,6 +28,10 @@ module.exports = {
             model: 'Instituciones',
             key: 'id',
         }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,

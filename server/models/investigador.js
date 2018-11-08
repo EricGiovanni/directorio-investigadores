@@ -2,7 +2,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Investigador = sequelize.define('Investigador', {
     CV: DataTypes.STRING
-  }, {});
+  }, {
+    freezeTableName: true,
+  });
   Investigador.associate = function(models) {
     Investigador.belongsToMany(models.Instituto, {
         through: models.InstitutoInvestigador,

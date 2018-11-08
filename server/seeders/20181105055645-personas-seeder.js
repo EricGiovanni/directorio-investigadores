@@ -1,16 +1,21 @@
 'use strict';
+var faker = require('faker');
+faker.locale = "es_MX";
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Personas', [{
-        nombre: 'Persona',
-        apellido_paterno: 'Prueba',
-        apellido_materno: 'Prueba',
-        correo_electronico: 'prueba@prueba.com',
-        contrasena: 'abeurp',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }], {});
+      var personas = [];
+      for (var i = 0; i < 50; i++) {
+          personas[i] = {
+              nombres: faker.name.findName(),
+              apellidos: faker.name.lastName() + " " + faker.name.lastName(),
+              correo_electronico: faker.internet.email(),
+              contrasena: faker.internet.password(),
+              createdAt: new Date(),
+              updatedAt: new Date(),
+          };
+      }
+      return queryInterface.bulkInsert('Personas', personas, {});
   },
 
   down: (queryInterface, Sequelize) => {

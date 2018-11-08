@@ -8,15 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nombre: {
+      nombres: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      apellido_paterno: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      apellido_materno: {
+      apellidos: {
         type: Sequelize.STRING,
         allowNull: false,
       },
