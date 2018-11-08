@@ -8,6 +8,8 @@ var indexRouter = require('./server/routes/index');
 var personasRouter = require('./server/routes/personas');
 var campusRouter = require('./server/routes/campus');
 var estadosRouter = require('./server/routes/estados');
+var paisesRouter = require('./server/routes/paises');
+var institucionesRouter = require('./server/routes/instituciones');
 
 var app = express();
 
@@ -29,6 +31,8 @@ app.use('/', indexRouter);
 app.use('/personas', personasRouter);
 app.use('/campus', campusRouter);
 app.use('/estados', estadosRouter);
+app.use('/paises', paisesRouter);
+app.use('/instituciones', institucionesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
