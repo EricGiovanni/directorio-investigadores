@@ -5,11 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./server/routes/index');
-var personasRouter = require('./server/routes/personas');
+var usersRouter = require('./server/routes/users');
 var campusRouter = require('./server/routes/campus');
-var estadosRouter = require('./server/routes/estados');
-var paisesRouter = require('./server/routes/paises');
-var institucionesRouter = require('./server/routes/instituciones');
+var statesRouter = require('./server/routes/states');
+var countriesRouter = require('./server/routes/countries');
+var institutionsRouter = require('./server/routes/institutions');
 
 var app = express();
 
@@ -28,11 +28,11 @@ app.use('/popper', express.static(path.join(__dirname, '/node_modules/popper.js/
 app.use('/jquery', express.static(path.join(__dirname, '/node_modules/jquery/dist/')))
 
 app.use('/', indexRouter);
-app.use('/personas', personasRouter);
+app.use('/usuarios', usersRouter);
 app.use('/campus', campusRouter);
-app.use('/estados', estadosRouter);
-app.use('/paises', paisesRouter);
-app.use('/instituciones', institucionesRouter);
+app.use('/estados', statesRouter);
+app.use('/paises', countriesRouter);
+app.use('/instituciones', institutionsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

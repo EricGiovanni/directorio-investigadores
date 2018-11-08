@@ -5,9 +5,9 @@ module.exports = {
     create(req, res) {
         return Campus
             .create({
-                nombre: req.body.nombre,
-                id_estado: req.body.id_estado,
-                id_institucion: req.body.id_institucion,
+                name: req.body.name,
+                state_id: req.body.state_id,
+                institution_id: req.body.institution_id,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             })
@@ -28,13 +28,13 @@ module.exports = {
             .then(campus => {
                 if (!campus)
                     return res.status(404).send({
-                        message: 'Campus no encontrado',
+                        message: 'Campus not found',
                     });
                 return campus
                     .update({
-                        nombre: req.body.nombre || campus.nombre,
-                        id_estado: req.body.id_estado || campus.id_estado,
-                        id_institucion: req.body.id_institucion || campus.id_institucion,
+                        name: req.body.name || campus.name,
+                        state_id: req.body.state_id || campus.state_id,
+                        institution_id: req.body.institution_id || campus.institution_id,
                     })
                     .then(() => res.status(200).send(campus))
                     .catch((error) => res.status(400).send(error));
@@ -47,7 +47,7 @@ module.exports = {
             .then(campus => {
                 if (!campus) {
                     return res.status(404).send({
-                        message: 'Campus no encontrado',
+                        message: 'Campus not found',
                     });
                 }
                 return campus
@@ -63,7 +63,7 @@ module.exports = {
             .then(campus => {
                 if (!campus) {
                     return res.status(404).send({
-                        message: 'Campus no encontrado',
+                        message: 'Campus not found',
                     });
                 }
                 return res.status(200).send(campus);
