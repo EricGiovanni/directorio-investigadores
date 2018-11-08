@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     nombre: DataTypes.STRING,
     es_publica: DataTypes.BOOLEAN,
     es_independiente: DataTypes.BOOLEAN
-  }, {});
+  }, {
+    freezeTableName: true,
+  });
   Institucion.associate = function(models) {
     Institucion.hasMany(models.Campus, {
         as: 'campus',

@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     descripcion: DataTypes.TEXT,
     fecha_inicio: DataTypes.DATE,
     fecha_fin: DataTypes.DATE
-  }, {});
+  }, {
+    freezeTableName: true,
+  });
   Grupo.associate = function(models) {
     Grupo.hasOne(models.Investigador, {
         foreignKey: 'id_creador',

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Colegios', {
+    return queryInterface.createTable('Estados', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,20 +11,12 @@ module.exports = {
       nombre: {
         type: Sequelize.STRING
       },
-      esFacultad: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      esEscuela: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      id_campus: {
+      id_pais: {
         type: Sequelize.INTEGER,
         allowNull: false,
         foreignKey: true,
         references: {
-            model: 'Campus',
+            model: 'Paises',
             key: 'id',
         },
       },
@@ -39,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Colegios');
+    return queryInterface.dropTable('Estados');
   }
 };

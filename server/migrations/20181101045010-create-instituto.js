@@ -11,15 +11,6 @@ module.exports = {
       nombre: {
         type: Sequelize.STRING
       },
-      entidad: {
-        type: Sequelize.STRING
-      },
-      municipio: {
-        type: Sequelize.STRING
-      },
-      ciudad: {
-        type: Sequelize.STRING
-      },
       calle: {
         type: Sequelize.STRING
       },

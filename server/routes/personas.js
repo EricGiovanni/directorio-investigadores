@@ -6,5 +6,6 @@ router.get('/', personasRouter.list);
 router.post('/', personasRouter.create);
 router.put('/:personaId', personasRouter.update);
 router.delete('/:personaId', personasRouter.delete);
+router.get('/:personaId', personasRouter.show);
 
 module.exports = router;
