@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Campus', {
+    return queryInterface.createTable('Institution', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,23 +11,11 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      state_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        foreignKey: true,
-        references: {
-            model: 'State',
-            key: 'id',
-        },
+      is_public: {
+        type: Sequelize.BOOLEAN
       },
-      institution_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        foreignKey: true,
-        references: {
-            model: 'Institution',
-            key: 'id',
-        }
+      is_independent: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -40,6 +28,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Campus');
+    return queryInterface.dropTable('Institution');
   }
 };
