@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./server/routes/index');
 var personasRouter = require('./server/routes/personas');
 var campusRouter = require('./server/routes/campus');
+var estadosRouter = require('./server/routes/estados');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/jquery', express.static(path.join(__dirname, '/node_modules/jquery/dis
 app.use('/', indexRouter);
 app.use('/personas', personasRouter);
 app.use('/campus', campusRouter);
+app.use('/estados', estadosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

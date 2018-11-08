@@ -13,10 +13,10 @@ module.exports = {
               updatedAt: new Date(),
           };
       }
-      return queryInterface.bulkInsert('Estados', estados, {});
+      return queryInterface.bulkInsert('Estado', estados, {});
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Estados', null, {});
+      return queryInterface.bulkDelete('Estado', null, {});
   }
 };

@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false,
         foreignKey: true,
         references: {
-            model: 'Estados',
+            model: 'Estado',
             key: 'id',
         },
       },
@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
         foreignKey: true,
         references: {
-            model: 'Instituciones',
+            model: 'Institucion',
             key: 'id',
         }
       },

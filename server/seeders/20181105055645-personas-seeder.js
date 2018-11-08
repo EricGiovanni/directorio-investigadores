@@ -15,10 +15,10 @@ module.exports = {
               updatedAt: new Date(),
           };
       }
-      return queryInterface.bulkInsert('Personas', personas, {});
+      return queryInterface.bulkInsert('Persona', personas, {});
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Personas', null, {});
+      return queryInterface.bulkDelete('Persona', null, {});
   }
 };

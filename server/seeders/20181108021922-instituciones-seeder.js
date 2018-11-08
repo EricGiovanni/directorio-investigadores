@@ -14,10 +14,10 @@ module.exports = {
               updatedAt: new Date(),
           };
       }
-      return queryInterface.bulkInsert('Instituciones', instituciones, {});
+      return queryInterface.bulkInsert('Institucion', instituciones, {});
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Instituciones', null, {});
+      return queryInterface.bulkDelete('Institucion', null, {});
   }
 };

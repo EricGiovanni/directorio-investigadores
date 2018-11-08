@@ -1,7 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Estado = sequelize.define('Estado', {
-    nombre: DataTypes.STRING
+    nombre: DataTypes.STRING,
+    id_pais: {
+        type: DataTypes.INTEGER,
+        references: 'paises',
+        referencesKey: 'id'
+    },
   }, {
     freezeTableName: true,
   });
