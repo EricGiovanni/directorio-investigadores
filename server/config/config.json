@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": "toor",
-    "database": "directorio_investigadores_dev",
+    "database": "research_directory_dev",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "directorio_investigadores_test",
+    "database": "research_directory_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "directorio_investigadores_production",
+    "database": "research_directory_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
