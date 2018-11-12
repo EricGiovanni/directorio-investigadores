@@ -20,7 +20,8 @@
     "mysql2": "^1.6.1",
     "popper.js": "^1.14.4",
     "pug": "^2.0.3",
-    "sequelize": "^4.41.1"
+    "sequelize": "^4.41.1",
+    "sequelize-cli": "^5.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.6"
