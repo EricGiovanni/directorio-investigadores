@@ -17,11 +17,11 @@ block content
                 span.sr-only (current)
           li.nav-item
             a.nav-link(href='#')
-              button.btn.btn-primary(type='button', data-toggle='modal' data-target='#myModal', id='aviso')
+              button.btn.btn-primary(type='button', data-toggle='modal' data-target='#logInModal', id='aviso')
                 strong Iniciar Sesión
           li.nav-item
             a.nav-link(href='#')
-              button.btn.btn-primary(type='button', data-toggle='modal' data-target='#myModal', id='aviso') 
+              button.btn.btn-primary(type='button', data-toggle='modal' data-target='#signUpModal', id='aviso') 
                 strong Registrarse
 
     div.row
@@ -66,16 +66,42 @@ block content
           div(id='edo')
           img.map(src='/images/mapa.png', usemap='#mexico', title='Mexico', alt='Mexico')
 
-  div.modal(id='myModal')
-    div.modal-dialog.modal-lg
+
+  div.modal.fade(id='logInModal'  role='dialog')
+    div.modal-dialog(role='form')
       div.modal-content
         div.modal-header
-          h4.modal-title Iniciar Sesión
-            button.close(type='button', data-dismiss='modal') &times;
+          h5.modal-title Log in
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span &times;
+        form(action="/logIn" method="post" id='logInForm')
+          div.modal-body
+            .form-group
+              label.col-form-label(for='userMail') E-mail
+              input.form-control(type='text' id='userMail' name="email")
+            .form-group
+              label.col-form-label(for='password') Contraseña
+              input.form-control(type='password' id='password' name='password')
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Cancelar
+            button.btn.btn-primary(id='logInButton' type='submit') Ingresar     
 
-      div.modal-body
-        form
-          input(type='text')
-
-      div.modal-footer
-        button.btn.btn-danger(type='button') Cerrar
+  div.modal.fade(id='signUpModal'  role='dialog')
+    div.modal-dialog(role='form')
+      div.modal-content
+        div.modal-header
+          h5.modal-title Registrarse
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span &times;
+        form(action="/signUp" method="post" id='signUpForm')
+          div.modal-body
+            .form-group
+              label.col-form-label(for='newUserMail') E-mail
+              input.form-control(type='email' id='newUserMail' name="newEmail")
+            .form-group
+              label.col-form-label(for='newPassword') Contraseña
+              input.form-control(type='password' id='newPassword' name='newPassword')
+            .form-group
+              label.col-form-label(for='newPasswordMatch') Confirmar contraseña
+              input.form-control(type='password' id='newPasswordMatch' name='newPasswordMatch')
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Cancelar
+            button.btn.btn-primary(id='signUpButton' type='submit') Registrarse 
