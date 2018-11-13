@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var passport = require('passport');
 
 var indexRouter = require('./server/routes/index');
 var usersRouter = require('./server/routes/users');
@@ -22,6 +24,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'pKmB1pAATDep',
+  resave: false,
+  saveUninitialized: false,
+  //cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use('/bootstrap', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/')));
 app.use('/popper', express.static(path.join(__dirname, '/node_modules/popper.js/dist/')));
