@@ -14,6 +14,10 @@ router.get('/', function(req, res, next) {
 });
 
 
+router.get('/logIn',function(req,res,next){
+  res.render('login');
+});
+
 router.post('/logIn',function(req,res,next){
   var email = req.body.email;
   var password = req.body.password;
@@ -21,12 +25,15 @@ router.post('/logIn',function(req,res,next){
   console.log(req.body);     //debugging log
   User.findOne({
     where: {
-      email: email
+      email: email,
+      password: password
     },
     })
     .then(user => {
       if (user===null) {
-        res.send('Usuario o contraseña inválida.');
+        res.render('login',{
+          error: 'Correo y contraseña no coinciden'
+        });
       } else {
         req.login(user, function(err){
           res.redirect('/')
@@ -35,6 +42,10 @@ router.post('/logIn',function(req,res,next){
       }
     });
 });
+
+router.get('/signUp', function(req,res,next){
+  res.render('signup');
+})
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);

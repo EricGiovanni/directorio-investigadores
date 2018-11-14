@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    .container
+        h5 Registrarse
+        form(action="/signUp" method="post" id='signUpForm')
+            div.modal-body
+            .form-group
+                label.col-form-label(for='newUserMail') E-mail
+                input.form-control(type='email' id='newUserMail' name="newEmail")
+            .form-group
+                label.col-form-label(for='newPassword') Contraseña
+                input.form-control(type='password' id='newPassword' name='newPassword')
+            .form-group
+                label.col-form-label(for='newPasswordMatch') Confirmar contraseña
+                input.form-control(type='password' id='newPasswordMatch' name='newPasswordMatch')
+            a.btn.btn-secondary(href='/') Cancelar
+            button.btn.btn-primary(id='signUpButton' type='submit') Registrarse 
