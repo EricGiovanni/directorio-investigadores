@@ -16,15 +16,19 @@ block content
                 strong Inicio
                 span.sr-only (current)
           li.nav-item
-            a.nav-link(href='#')
-              button.btn.btn-primary(type='button', data-toggle='modal' data-target='#logInModal', id='aviso')
+            a.nav-link(href='/logIn')
+              button.btn.btn-primary
                 strong Iniciar Sesión
           li.nav-item
-            a.nav-link(href='#')
-              button.btn.btn-primary(type='button', data-toggle='modal' data-target='#signUpModal', id='aviso') 
+            a.nav-link(href='/signUp')
+              button.btn.btn-primary
                 strong Registrarse
+          li.nav_item
+            a.nav_link(href='/perfil')
+              button.btn.btn-primary 
+                strong Perfil
 
-    div.row
+    div.container
       form(id='form1', runat='server')
         map(name='mexico')
           area(id='AGU', alt='AGU', title='Aguascalientes', class='area', href='#', shape='poly', coords='317,269,317,268,319,268,319,269,320,269,320,270,321,270,321,272,322,272,322,275,323,275,323,276,324,276,324,277,325,277,325,278,324,278,324,279,322,279,322,280,321,280,321,281,320,281,320,282,319,282,319,283,315,283,315,282,312,282,312,281,308,281,308,282,306,282,306,283,306,282,305,282,305,280,304,280,304,277,305,277,305,275,307,275,307,274,308,274,308,273,310,273,310,272,311,272,311,271,313,271,313,270,315,269,317,269')
@@ -67,41 +71,3 @@ block content
           img.map(src='/images/mapa.png', usemap='#mexico', title='Mexico', alt='Mexico')
 
 
-  div.modal.fade(id='logInModal'  role='dialog')
-    div.modal-dialog(role='form')
-      div.modal-content
-        div.modal-header
-          h5.modal-title Log in
-          button.close(type='button' data-dismiss='modal' aria-label='Close')
-            span &times;
-        form(action="/logIn" method="post" id='logInForm')
-          div.modal-body
-            .form-group
-              label.col-form-label(for='userMail') E-mail
-              input.form-control(type='text' id='userMail' name="email")
-            .form-group
-              label.col-form-label(for='password') Contraseña
-              input.form-control(type='password' id='password' name='password')
-            button.btn.btn-secondary(type='button' data-dismiss='modal') Cancelar
-            button.btn.btn-primary(id='logInButton' type='submit') Ingresar     
-
-  div.modal.fade(id='signUpModal'  role='dialog')
-    div.modal-dialog(role='form')
-      div.modal-content
-        div.modal-header
-          h5.modal-title Registrarse
-          button.close(type='button' data-dismiss='modal' aria-label='Close')
-            span &times;
-        form(action="/signUp" method="post" id='signUpForm')
-          div.modal-body
-            .form-group
-              label.col-form-label(for='newUserMail') E-mail
-              input.form-control(type='email' id='newUserMail' name="newEmail")
-            .form-group
-              label.col-form-label(for='newPassword') Contraseña
-              input.form-control(type='password' id='newPassword' name='newPassword')
-            .form-group
-              label.col-form-label(for='newPasswordMatch') Confirmar contraseña
-              input.form-control(type='password' id='newPasswordMatch' name='newPasswordMatch')
-            button.btn.btn-secondary(type='button' data-dismiss='modal') Cancelar
-            button.btn.btn-primary(id='signUpButton' type='submit') Registrarse 
