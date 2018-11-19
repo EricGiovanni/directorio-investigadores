@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
   const College = sequelize.define('College', {
     name: DataTypes.STRING,
     is_faculty: DataTypes.BOOLEAN,
-    is_school: DataTypes.BOOLEAN,
     campus_id: {
         type: DataTypes.INTEGER,
         references: 'campus',

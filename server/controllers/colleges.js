@@ -64,13 +64,13 @@ module.exports ={
   show(req, res){
     return College
       .findByPk(req.params.collegeId)
-      .then(institution => {
-        if(!institution){
+      .then(college => {
+        if(!college){
           return res.status(404).send({
             message: 'Institution not found',
           });
         }
-        return res.status(200).send(institution);
+        return res.status(200).send(college);
       })
       .catch(error => res.status(400).send(error));
   },
