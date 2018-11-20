@@ -15,10 +15,6 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
-      is_school: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
       campus_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

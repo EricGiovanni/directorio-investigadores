@@ -7,6 +7,7 @@ var session = require('express-session');
 var passport = require('passport');
 
 var indexRouter = require('./server/routes/index');
+var profileRouter = require('./server/routes/profile');
 var usersRouter = require('./server/routes/users');
 var campusRouter = require('./server/routes/campus');
 var statesRouter = require('./server/routes/states');
@@ -18,6 +19,10 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.use('/bootstrap', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/')));
+app.use('/popper', express.static(path.join(__dirname, '/node_modules/popper.js/dist/')));
+app.use('/jquery', express.static(path.join(__dirname, '/node_modules/jquery/dist/')));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -34,11 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use('/bootstrap', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/')));
-app.use('/popper', express.static(path.join(__dirname, '/node_modules/popper.js/dist/')));
-app.use('/jquery', express.static(path.join(__dirname, '/node_modules/jquery/dist/')));
-
 app.use('/', indexRouter);
+app.use('/perfil', profileRouter);
 app.use('/usuarios', usersRouter);
 app.use('/campus', campusRouter);
 app.use('/estados', statesRouter);

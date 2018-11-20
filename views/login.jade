@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    if error
+        .container
+            .alert.alert-danger
+                span #{error}
+
+    .container
+        h5 Log in
+            form(action="/logIn" method="post" id='logInForm')
+                .form-group
+                    label.col-form-label(for='userMail') E-mail
+                    input.form-control(type='text' id='userMail' name="email")
+                .form-group
+                label.col-form-label(for='password') Contraseña
+                    input.form-control(type='password' id='password' name='password')
+                .form-group
+                a.btn.btn-secondary(href='/') Cancelar
+                button.btn.btn-primary(id='logInButton' type='submit') Ingresar     
