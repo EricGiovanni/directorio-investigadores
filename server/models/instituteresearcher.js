@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         references: 'researcher',
         referencesKey: 'id'
     },
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }, {
     freezeTableName: true,
   });

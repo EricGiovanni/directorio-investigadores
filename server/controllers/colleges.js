@@ -6,12 +6,12 @@ module.exports ={
   create(req, res){
     return College
       .create({
-        name: req.body.name;
-        is_faculty: req.body.is_faculty;
-        is_school: req.body.is_school;
-        campus_id: req.body.campus_id;
-        createdAt: new Date()
-        updatedAt: new Date()
+        name: req.body.name,
+        is_faculty: req.body.is_faculty,
+        is_school: req.body.is_school,
+        campus_id: req.body.campus_id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       })
       .then(colleges => res.status(201).send(colleges))
       .catch(error => res.status(400).send(error));
@@ -40,8 +40,8 @@ module.exports ={
             is_faculty: req.body.is_faculty || college.is_faculty
             is_school: req.body.is_school || college.is_school
           })
-          .then(() => res.status(200).send(institution))
-          -cath((error) => res.status(400).send(error));
+          .then(() => res.status(200).send(college))
+          .cath((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
   },
