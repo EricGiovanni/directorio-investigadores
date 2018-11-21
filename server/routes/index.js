@@ -8,14 +8,20 @@ var User = require('../models/user')(db.sequelize,db.Sequelize);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log(req.user);                 //debugging logs
-  console.log(req.isAuthenticated());
-  res.render('index');
+  console.log(req.isAuthenticated());  //debugging log
+  authenticated = req.isAuthenticated();
+  res.render('index',{
+    authenticated: authenticated
+  });
 });
 
 
 router.get('/logIn',function(req,res,next){
-  res.render('login');
+  if (req.isUnauthenticated()){
+    res.render('login');
+  } else {
+    res.redirect('/')
+  }
 });
 
 router.post('/logIn',function(req,res,next){
@@ -43,9 +49,6 @@ router.post('/logIn',function(req,res,next){
     });
 });
 
-router.get('/signUp', function(req,res,next){
-  res.render('signup');
-})
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);

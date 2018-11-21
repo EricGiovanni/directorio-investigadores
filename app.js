@@ -7,6 +7,7 @@ var session = require('express-session');
 var passport = require('passport');
 
 var indexRouter = require('./server/routes/index');
+var signUpRouter = require('./server/routes/signUp')
 var profileRouter = require('./server/routes/profile');
 var usersRouter = require('./server/routes/users');
 var campusRouter = require('./server/routes/campus');
@@ -46,6 +47,7 @@ app.use('/campus', campusRouter);
 app.use('/estados', statesRouter);
 app.use('/paises', countriesRouter);
 app.use('/instituciones', institutionsRouter);
+app.use('/registro', signUpRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

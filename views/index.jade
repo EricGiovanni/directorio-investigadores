@@ -21,19 +21,22 @@ block content
             a.nav-link(href='#') 
               button.btn.btn-primary(type='button')
                 strong Inicio
-                span.sr-only (current)
-          li.nav-item
-            a.nav-link(href='/logIn')
-              button.btn.btn-primary
-                strong Iniciar Sesión
-          li.nav-item
-            a.nav-link(href='/signUp')
-              button.btn.btn-primary
-                strong Registrarse
-          li.nav-item
-            a.nav-link(href='/perfil')
-              button.btn.btn-primary 
-                strong Perfil
+                span.sr-only (current)    
+          if !authenticated 
+            li.nav-item
+              a.nav-link(href='/logIn')
+                button.btn.btn-primary
+                  strong Iniciar Sesión
+          if !authenticated
+            li.nav-item
+              a.nav-link(href='/registro')
+                button.btn.btn-primary
+                  strong Registrarse
+          if authenticated
+            li.nav-item
+              a.nav-link(href='/perfil')
+                button.btn.btn-primary 
+                  strong Perfil
 
     .map
       
