@@ -6,6 +6,7 @@ module.exports = {
         return State
             .create({
                 nombre: req.body.nombre,
+                abbr: req.body.abbr,
                 country_id: req.body.country_id,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -32,6 +33,7 @@ module.exports = {
                 return state
                     .update({
                         nombre: req.body.nombre || state.nombre,
+                        abbr: req.body.abbr || state.abbr,
                         country_id: req.body.country_id || state.country_id,
                     })
                     .then(() => res.status(200).send(state))
