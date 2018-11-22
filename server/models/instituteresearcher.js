@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) => {
   const InstituteResearcher = sequelize.define('InstituteResearcher', {
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
-    institution_id: {
+    institute_id: {
         type: DataTypes.INTEGER,
-        references: 'institution',
+        references: 'institute',
         referencesKey: 'id'
     },
     researcher_id: {
@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
   });
   InstituteResearcher.associate = function(models) {
-    // associations can be defined here
   };
   return InstituteResearcher;
 };

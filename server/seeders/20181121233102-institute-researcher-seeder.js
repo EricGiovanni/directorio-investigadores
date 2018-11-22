@@ -8,8 +8,8 @@ module.exports = {
       institution_r[i]={
         start_date: faker.date.between('1930-01-01', '2018-11-10'),
         end_date: faker.date.between('1930-03-01','2018-11-10'),
-        institute_id: faker.random.number({min:1, max:50}),
-        researcher_id: faker.random.number({min:1, max:40}),
+        institute_id: faker.random.number({min:1, max:100}),
+        researcher_id: faker.random.number({min:1, max:30}),
         createdAt: new Date(),
         updatedAt: new Date(),
       };

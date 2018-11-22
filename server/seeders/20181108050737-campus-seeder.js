@@ -8,7 +8,7 @@ module.exports = {
       for (var i = 0; i < 100; i++) {
           campus[i] = {
               name: faker.company.companyName(),
-              state_id: faker.random.number({min:1, max: 50}),
+              state_id: faker.random.number({min:1, max: 32}),
               institution_id: faker.random.number({min:1, max: 50}),
               createdAt: new Date(),
               updatedAt: new Date(),

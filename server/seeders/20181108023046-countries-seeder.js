@@ -12,6 +12,11 @@ module.exports = {
               updatedAt: new Date(),
           };
       }
+      countries[10]={
+        name: 'México',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
       return queryInterface.bulkInsert('Country', countries, {});
   },
 

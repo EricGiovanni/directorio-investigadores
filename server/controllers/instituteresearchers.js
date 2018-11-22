@@ -7,7 +7,7 @@ module.exports = {
     .create({
       start_date: req.body.start_date,
       end_date: req.body.end_date,
-      institution_id: req.body.institution_id,
+      institute_id: req.body.institute_id,
       researcher_id: req.body.researcher_id,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -35,7 +35,7 @@ module.exports = {
         .update({
           start_date: req.body.start_date || instituteresearcher.start_date,
           end_date: req.body.end_date || instituteresearcher.end_date,
-          institution_id: req.body.institution_id || instituteresearcher.institution_id,
+          institute_id: req.body.institute_id || instituteresearcher.institute_id,
           researcher_id: req.body.researcher_id || instituteresearcher.researcher_id,
         })
         .then(()=> res.status(200).send(instituteresearcher))
