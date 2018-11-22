@@ -70,4 +70,14 @@ module.exports = {
             })
             .catch(error => res.status(400).send(error));
     },
+    getResearchersByState(req,res){
+        db.sequelize.query("select S.abbr as State, COUNT(R.id) as ResearcherCount FROM Researcher R INNER JOIN InstituteResearcher I ON R.id=I.researcher_id INNER JOIN Institute Ins ON I.institute_id=Ins.id INNER JOIN Campus C ON Ins.campus_id=C.id INNER JOIN State S ON C.state_id=S.id GROUP BY S.abbr"
+        ,{
+            type: db.Sequelize.QueryTypes.SELECT
+        }).then(states => {
+            return res.status(200).send(states);
+        })
+        .catch(error => res.status(400).send(error));
+    }
+
 };

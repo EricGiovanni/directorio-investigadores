@@ -2,6 +2,13 @@ var map;
 AmCharts.ready(function() {
     map = new AmCharts.AmMap();
     map.colorSteps = 10;
+    $.ajax({
+        url: 'http://localhost:3000/estados',
+        type: 'GET',
+        success: function(result){
+            console.log(result);
+        }
+    });
     var dataProvider = {
         mapVar: AmCharts.maps.mexicoHigh,
         areas: [
