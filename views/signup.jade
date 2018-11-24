@@ -3,16 +3,22 @@ extends layout
 block content
     .container
         h5 Registrarse
-        form(action="/signUp" method="post" id='signUpForm')
+        form(action="/registro" method="post" id='signUpForm')
             div.modal-body
             .form-group
-                label.col-form-label(for='newUserMail') E-mail
-                input.form-control(type='email' id='newUserMail' name="newEmail")
+                label.col-form-label(for='names') Nombres
+                input.form-control(type='text' id='names' name="names")
             .form-group
-                label.col-form-label(for='newPassword') Contraseña
-                input.form-control(type='password' id='newPassword' name='newPassword')
+                label.col-form-label(for='lastNames') Apellidos
+                input.form-control(type='text' id='lastNames' name="last_names")
             .form-group
-                label.col-form-label(for='newPasswordMatch') Confirmar contraseña
-                input.form-control(type='password' id='newPasswordMatch' name='newPasswordMatch')
+                label.col-form-label(for='email') E-mail
+                input.form-control(type='email' id='email' name="email")
+            .form-group
+                label.col-form-label(for='password') Contraseña
+                input.form-control(type='password' id='password' name='password')
+            .form-group
+                label.col-form-label(for='passwordMatch') Confirmar contraseña
+                input.form-control(type='password' id='passwordMatch' name='passwordMatch')
             a.btn.btn-secondary(href='/') Cancelar
-            button.btn.btn-primary(id='signUpButton' type='submit') Registrarse 
+            button.btn.btn-primary(id='signUpButton' type='submit') Registrarse

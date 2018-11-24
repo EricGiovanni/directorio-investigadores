@@ -75,4 +75,35 @@ module.exports = {
             })
             .catch(error => res.status(400).send(error));
     },
+    signUp(req, res) {
+        User.findOne({
+            where: {
+                email: req.body.email,
+            }
+        })
+        .then((existingUser) => {
+            if (existingUser) {
+                return res.render('signup', {
+                    error: 'El correo electrónico ya ha sido registrado'
+                });
+            }
+            else if (req.body.password != req.body.passwordMatch) {
+                return res.render('signup', {
+                    error: 'Las contraseñas no coinciden'
+                });
+            }
+        })
+        .then(() => {
+            return User.create({
+                names: req.body.names,
+                last_names: req.body.last_names,
+                email: req.body.email,
+                password: bcrypt.hashSync(req.body.password),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            })
+            .then(() => res.render('login'))
+            .catch(error => res.status(400).send(error));
+        });
+    },
 };

@@ -26,22 +26,21 @@ router.get('/logIn',function(req,res,next){
   }
 });
 
-router.post('/logIn',function(req,res,next) {
+router.post('/logIn', function(req, res, next) {
     User.findOne({
         where: {
             email: req.body.email,
         },
     })
-    .then(user => {
+    .then((user) => {
         if (user === null || !bcrypt.compareSync(req.body.password, user.password))
-            res.render('login',{
+            res.render('login', {
                 error: 'El correo electrónico o la contraseña son incorrectos'
             });
         else
             req.login(user, function(err) {
-                res.redirect('/')
+                res.redirect('/');
             });
-        }
     });
 });
 
