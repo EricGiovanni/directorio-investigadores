@@ -4,6 +4,8 @@ var passport = require('passport');
 
 var db = require('../models/index');
 var User = require('../models/user')(db.sequelize,db.Sequelize);
+var bcrypt = require('bcrypt-node');
+
 
 
 /* GET home page. */
@@ -24,28 +26,22 @@ router.get('/logIn',function(req,res,next){
   }
 });
 
-router.post('/logIn',function(req,res,next){
-  var email = req.body.email;
-  var password = req.body.password;
-
-  console.log(req.body);     //debugging log
-  User.findOne({
-    where: {
-      email: email,
-      password: password
-    },
+router.post('/logIn',function(req,res,next) {
+    User.findOne({
+        where: {
+            email: req.body.email,
+        },
     })
     .then(user => {
-      if (user===null) {
-        res.render('login',{
-          error: 'Correo y contraseña no coinciden'
-        });
-      } else {
-        req.login(user, function(err){
-          res.redirect('/')
-        });
-                
-      }
+        if (user === null || !bcrypt.compareSync(req.body.password, user.password))
+            res.render('login',{
+                error: 'El correo electrónico o la contraseña son incorrectos'
+            });
+        else
+            req.login(user, function(err) {
+                res.redirect('/')
+            });
+        }
     });
 });
 
