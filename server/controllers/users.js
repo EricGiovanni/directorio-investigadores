@@ -1,5 +1,6 @@
 var db = require("../models/index");
 const User = require('../models/user')(db.sequelize, db.Sequelize);
+var bcrypt = require('bcrypt-node');
 
 module.exports = {
     create(req, res) {
@@ -8,8 +9,7 @@ module.exports = {
                 names: req.body.names,
                 last_names: req.body.last_names,
                 email: req.body.email,
-                // TODO: Encrypt password using bcrypt
-                password: req.body.password,
+                password: bcrypt.hashSync(req.body.password),
                 createdAt: new Date(),
                 updatedAt: new Date(),
             })

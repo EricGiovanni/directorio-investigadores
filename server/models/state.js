@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const State = sequelize.define('State', {
     name: DataTypes.STRING,
+    abbr: DataTypes.STRING,
     country_id: {
         type: DataTypes.INTEGER,
         references: 'country',

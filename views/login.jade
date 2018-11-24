@@ -8,7 +8,7 @@ block content
 
     .container
         h5 Log in
-            form(action="/logIn" method="post" id='logInForm')
+            form(action="/acceso" method="post" id='logInForm')
                 .form-group
                     label.col-form-label(for='userMail') E-mail
                     input.form-control(type='text' id='userMail' name="email")
@@ -17,4 +17,4 @@ block content
                     input.form-control(type='password' id='password' name='password')
                 .form-group
                 a.btn.btn-secondary(href='/') Cancelar
-                button.btn.btn-primary(id='logInButton' type='submit') Ingresar     
+                button.btn.btn-primary(id='logInButton' type='submit') Ingresar

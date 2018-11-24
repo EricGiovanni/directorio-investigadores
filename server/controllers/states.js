@@ -6,6 +6,7 @@ module.exports = {
         return State
             .create({
                 nombre: req.body.nombre,
+                abbr: req.body.abbr,
                 country_id: req.body.country_id,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -32,6 +33,7 @@ module.exports = {
                 return state
                     .update({
                         nombre: req.body.nombre || state.nombre,
+                        abbr: req.body.abbr || state.abbr,
                         country_id: req.body.country_id || state.country_id,
                     })
                     .then(() => res.status(200).send(state))
@@ -68,4 +70,14 @@ module.exports = {
             })
             .catch(error => res.status(400).send(error));
     },
+    getResearchersByState(req,res){
+        db.sequelize.query("select S.abbr as State, COUNT(R.id) as ResearcherCount FROM Researcher R INNER JOIN InstituteResearcher I ON R.id=I.researcher_id INNER JOIN Institute Ins ON I.institute_id=Ins.id INNER JOIN Campus C ON Ins.campus_id=C.id INNER JOIN State S ON C.state_id=S.id GROUP BY S.abbr"
+        ,{
+            type: db.Sequelize.QueryTypes.SELECT
+        }).then(states => {
+            return res.status(200).send(states);
+        })
+        .catch(error => res.status(400).send(error));
+    }
+
 };
