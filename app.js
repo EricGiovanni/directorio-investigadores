@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
+require('dotenv').load();
 
 var indexRouter = require('./server/routes/index');
 var authRouter = require('./server/routes/auth')
@@ -40,10 +41,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use(function(req,res,next){
-  res.locals.isAuthenticated = req.isAuthenticated();
-  next();
-});
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/perfil', profileRouter);
