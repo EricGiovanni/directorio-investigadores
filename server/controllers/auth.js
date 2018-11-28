@@ -73,4 +73,11 @@ module.exports = {
             .catch(error => res.status(400).send(error));
         });
     },
+    logOut(req,res){
+    
+        req.logout();
+        req.session.destroy();
+        res.redirect('/');
+       
+    },
 };
