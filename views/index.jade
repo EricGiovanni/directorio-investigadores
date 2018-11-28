@@ -10,33 +10,7 @@ block append head
 
 block content
   .container
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      a.navbar-brand(href='#')
-        img.img-fluid(src='/images/icon.png', alt='Red de Investigadores')
-      button.navbar-toggler(data-target='#navbarNav' data-toggle='collapse' type='button' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse(id='navbarNav')
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='#')
-              button.btn.btn-primary(type='button')
-                strong Inicio
-                span.sr-only (current)
-          if !authenticated
-            li.nav-item
-              a.nav-link(href='/acceso')
-                button.btn.btn-primary
-                  strong Iniciar Sesión
-          if !authenticated
-            li.nav-item
-              a.nav-link(href='/registro')
-                button.btn.btn-primary
-                  strong Registrarse
-          if authenticated
-            li.nav-item
-              a.nav-link(href='/perfil')
-                button.btn.btn-primary
-                  strong Perfil
+    
 
     .map
 

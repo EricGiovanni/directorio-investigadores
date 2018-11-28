@@ -13,6 +13,42 @@ html
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Kaushan+Script')
     link(rel='icon', href='/images/icon.png')
   body
+    block header
+    .container-fluid
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        a.navbar-brand(href='#')
+          img.img-fluid(src='/images/icon.png', alt='Red de Investigadores')
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse(id='navbarNav')
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a.nav-link(href='/')
+                button.btn.btn-primary(type='button')
+                  strong Inicio
+                  span.sr-only (current)
+            if !isAuthenticated
+              li.nav-item
+                a.nav-link(href='/acceso')
+                  button.btn.btn-primary
+                    strong Iniciar Sesión
+            if !isAuthenticated
+              li.nav-item
+                a.nav-link(href='/registro')
+                  button.btn.btn-primary
+                    strong Registrarse
+            if isAuthenticated
+              li.nav-item
+                a.nav-link(href='/perfil')
+                  button.btn.btn-primary
+                    strong Perfil
+            if isAuthenticated
+              li.nav-item
+                a.nav-link(href='/salir')
+                  button.btn.btn-primary
+                    strong Salir
+
+
     block content
 
     block scripts
