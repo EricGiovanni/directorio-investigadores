@@ -2,6 +2,8 @@ var db = require("../models/index");
 const User = require('../models/user')(db.sequelize, db.Sequelize);
 var bcrypt = require('bcrypt-node');
 const sgMail = require('@sendgrid/mail');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     logInIndex(req, res) {
@@ -61,12 +63,16 @@ module.exports = {
                 updatedAt: new Date(),
             })
             .then((user) => {
+                var emailHTML = path.join(__dirname, "..", "..", "views/email/", "confirm.html");
+                emailHTML = fs.readFileSync(emailHTML).toString();
+                emailHTML = emailHTML.replace(/{{user.names}}/gm, user.names);
+                emailHTML = emailHTML.replace(/{{support_email}}/gm, process.env.support_email);
                 sgMail.setApiKey(process.env.sendgrid_api_key);
                 sgMail.send({
                     to: user.email,
                     from: process.env.support_email,
                     subject: user.names + ', activa tu cuenta',
-                    html: '<strong>Activar cuenta</strong>',
+                    html: emailHTML,
                 });
                 res.render('login');
             })
@@ -74,10 +80,10 @@ module.exports = {
         });
     },
     logOut(req,res){
-    
+
         req.logout();
         req.session.destroy();
         res.redirect('/');
-       
+
     },
 };
