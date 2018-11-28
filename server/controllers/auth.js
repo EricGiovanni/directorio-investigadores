@@ -1,6 +1,7 @@
 var db = require("../models/index");
 const User = require('../models/user')(db.sequelize, db.Sequelize);
 var bcrypt = require('bcrypt-node');
+const sgMail = require('@sendgrid/mail');
 
 module.exports = {
     logInIndex(req, res) {
@@ -51,7 +52,7 @@ module.exports = {
             }
         })
         .then(() => {
-            return User.create({
+            User.create({
                 names: req.body.names,
                 last_names: req.body.last_names,
                 email: req.body.email,
@@ -59,7 +60,16 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             })
-            .then(() => res.render('login'))
+            .then((user) => {
+                sgMail.setApiKey(process.env.sendgrid_api_key);
+                sgMail.send({
+                    to: user.email,
+                    from: process.env.support_email,
+                    subject: user.names + ', activa tu cuenta',
+                    html: '<strong>Activar cuenta</strong>',
+                });
+                res.render('login');
+            })
             .catch(error => res.status(400).send(error));
         });
     },
