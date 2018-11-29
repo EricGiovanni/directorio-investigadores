@@ -24,6 +24,12 @@ module.exports = {
                 res.render('login', {
                     error: 'El correo electrónico o la contraseña son incorrectos'
                 });
+            else if (user.approved == false) {
+                res.render('login', {
+                    error: 'La cuenta no ha sido confirmada, verifica tu bandeja de'
+                        + ' correo electrónico'
+                });
+            }
             else
                 req.login(user, function(err) {
                     res.redirect('/');
@@ -101,14 +107,14 @@ module.exports = {
         .then((user) => {
             if (!user)
                 return res.status(404).send({
-                    message: 'No existe un usuario con esa ficha de confirmación',
+                    error: 'No existe un usuario con esa ficha de confirmación',
                 });
             return user
                 .update({
                     approved: true,
                 })
                 .then(() => res.render('login', {
-                    message: "Cuenta confirmada correctamente",
+                    success: "Cuenta confirmada correctamente",
                 }))
                 .catch((error) => res.render('/', {
                     error: error,
