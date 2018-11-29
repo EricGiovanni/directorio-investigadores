@@ -8,39 +8,47 @@ html
     link(rel='icon', href='/images/icon.png')
   body
     block header
-    .container-fluid
-      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top.text-nowrap
+      .container
         a.navbar-brand(href='#')
-          img.img-fluid(src='/images/icon.png', alt='Red de Investigadores')
+          img.img-fluid(src='/images/icon.png', alt='Red de Investigadores' id='navbar-brand')
         button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
           span.navbar-toggler-icon
         .collapse.navbar-collapse(id='navbarNav')
           ul.navbar-nav.mr-auto
-            li.nav-item.active
+            li.nav-item.mx-1
               a.nav-link(href='/')
-                button.btn.btn-primary(type='button')
-                  strong Inicio
-                  span.sr-only (current)
+                strong Inicio
+            li.nav-item
+              from.form-inline(role='search')
+                .input-group
+                  .input-group-prepend
+                    select.form-control
+                      option(value='1') Todos
+                      option(value='2') Investigador
+                      option(value='3') Estado
+                      option(value='4') Institución
+                  input.form-control(type="text" placeholder='Busqueda rápida')
+                  .input-group-append
+                    button.btn.btn-secondary(type='submit') Buscar
+           ul.navbar-nav
             if !isAuthenticated
-              li.nav-item
+              li.nav-item-mx-1
                 a.nav-link(href='/acceso')
-                  button.btn.btn-primary
                     strong Iniciar Sesión
             if !isAuthenticated
-              li.nav-item
+              li.nav-item.mx-1
                 a.nav-link(href='/registro')
-                  button.btn.btn-primary
-                    strong Registrarse
+                  strong Registrarse
             if isAuthenticated
-              li.nav-item
+              li.nav-item.mx-1
                 a.nav-link(href='/perfil')
-                  button.btn.btn-primary
-                    strong Perfil
+                  strong Perfil
             if isAuthenticated
-              li.nav-item
+              li.nav-item.mx-1
                 a.nav-link(href='/salir')
-                  button.btn.btn-primary
-                    strong Salir
+                  strong Salir
 
 
     block content
