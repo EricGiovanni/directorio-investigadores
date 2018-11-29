@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt-node');
 const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
 const path = require('path');
+const randomstring = require("randomstring");
 
 module.exports = {
     logInIndex(req, res) {
@@ -59,14 +60,19 @@ module.exports = {
                 last_names: req.body.last_names,
                 email: req.body.email,
                 password: bcrypt.hashSync(req.body.password),
+                token: randomstring.generate(25),
                 createdAt: new Date(),
                 updatedAt: new Date(),
             })
             .then((user) => {
+                let confirmation_link = "http://" + process.env.HOST + ":"
+                                        + process.env.PORT + "/"
+                                        + "confirmacion/" + user.token;
                 var emailHTML = path.join(__dirname, "..", "..", "views/email/", "confirm.html");
                 emailHTML = fs.readFileSync(emailHTML).toString();
                 emailHTML = emailHTML.replace(/{{user.names}}/gm, user.names);
                 emailHTML = emailHTML.replace(/{{support_email}}/gm, process.env.support_email);
+                emailHTML = emailHTML.replace(/{{confirmation_link}}/gm, confirmation_link);
                 sgMail.setApiKey(process.env.sendgrid_api_key);
                 sgMail.send({
                     to: user.email,
@@ -79,11 +85,35 @@ module.exports = {
             .catch(error => res.status(400).send(error));
         });
     },
-    logOut(req,res){
+    logOut(req, res){
 
         req.logout();
         req.session.destroy();
         res.redirect('/');
 
+    },
+    confirmation(req, res) {
+        User.findOne({
+            where: {
+                token: req.params.ficha,
+            }
+        })
+        .then((user) => {
+            if (!user)
+                return res.status(404).send({
+                    message: 'No existe un usuario con esa ficha de confirmación',
+                });
+            return user
+                .update({
+                    approved: true,
+                })
+                .then(() => res.render('login', {
+                    message: "Cuenta confirmada correctamente",
+                }))
+                .catch((error) => res.render('/', {
+                    error: error,
+                }));
+        })
+        .catch((error) => res.status(400).send(error));
     },
 };
