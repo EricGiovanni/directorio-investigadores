@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    .container
+        if users.length != 0
+            span Usuarios
+            hr
+            div.list-group
+                each user in users
+                    a.list-group-item.list-group-item-action(href='#') #{user.last_names +', ' + user.names}
+        if institutions.length != 0
+            span Instituciones
+            hr
+            div.list-group
+                each institution in institutions
+                    a.list-group-item.list-group-item-action #{institution.name}
+        if institutions.lenght == 0 && institutions.length == 0
+            span Sin resultados

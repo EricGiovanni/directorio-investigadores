@@ -8,7 +8,8 @@ var passport = require('passport');
 require('dotenv').load();
 
 var indexRouter = require('./server/routes/index');
-var authRouter = require('./server/routes/auth')
+var authRouter = require('./server/routes/auth');
+var searchRouter = require('./server/routes/search');
 var profileRouter = require('./server/routes/profile');
 var usersRouter = require('./server/routes/users');
 var campusRouter = require('./server/routes/campus');
@@ -46,6 +47,7 @@ app.use(function(req,res,next){
 });
 app.use('/', indexRouter);
 app.use('/', authRouter);
+app.use('/busqueda', searchRouter);
 app.use('/perfil', profileRouter);
 app.use('/usuarios', usersRouter);
 app.use('/campus', campusRouter);
