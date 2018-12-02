@@ -31,10 +31,9 @@ html
                 .input-group-prepend
                   select.form-control(id='quick_search_type')
                     option(value='1') Todos
-                    option(value='2') Investigador
-                    option(value='3') Estado
-                    option(value='4') Institución
-                input.form-control(type="text" placeholder='Busqueda rápida' id='quick_search_input' name='quick_search_input')
+                    option(value='2') Personas
+                    option(value='3') Institución
+                input.form-control(required='required' type="text" placeholder='Busqueda rápida' id='quick_search_input' name='quick_search_input')
                 .input-group-append
                   button.btn.btn-secondary(type='submit' id='quick_search_button') Buscar
            ul.navbar-nav
@@ -79,6 +78,10 @@ html
               return;
             if (type == 1)
               location.href = "/busqueda/busquedarapida/"+search_title;
+            if (type == 2)
+              location.href = "/busqueda/personas/"+search_title;
+            if (type == 3) 
+              location.href = "/busqueda/institucion/"+search_title;
             event.preventDefault();
           });
        });
