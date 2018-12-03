@@ -1,20 +1,26 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
 
 var db = require('../models/index');
-var User = require('../models/user')(db.sequelize,db.Sequelize);
+var userModel = require('../models/user')(db.sequelize,db.Sequelize);
 
-router.get('/',function(req,res,next){
-    if(req.isUnauthenticated()){
-        res.redirect('/');
-    } else {
-        console.log(req.user);
-        name = req.user.names;
-        res.render('profile', {
-            nombre: name
-        });
-    }
+router.get('/usuario/:id/:user',function(req,res,next){
+    userModel.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(user => {
+        if (!user){
+            res.redirect('/');
+        } else {
+            var isOwner = req.isAuthenticated() ? req.params.id == req.user.id : false;
+            res.render('profile',{
+                isOwner: isOwner,
+                user: user
+            })
+        }
+    })
+    
 });
 
 module.exports = router;
