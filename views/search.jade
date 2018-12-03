@@ -8,7 +8,8 @@ block content
             hr
             div.list-group
                 each user in users
-                    a.list-group-item.list-group-item-action(href='#') #{user.last_names +', ' + user.names}
+                    -var userUrl = '/perfil/'+'/usuario/'+user.id+'/'+user.names.replace(/\W/g, '')
+                    a.list-group-item.list-group-item-action(href='#{userUrl}') #{user.last_names +', ' + user.names}
         if institutions 
             p.text-left Instituciones 
                 span.float-right Número de resultados: #{institutions.length}

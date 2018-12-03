@@ -9,7 +9,7 @@ block content
             .col-lg-3.col-md-4
                 .profile
                     .profile-name
-                        span.name #{name}
+                        span.name #{user.names}
                 figure.profile-image
                     image(src='/images/profile.jpg' alt='')
                 ul.profile-information
@@ -17,7 +17,7 @@ block content
                     li
                         p
                             span Nombre:
-                            b #{name}
+                            b #{user.names}
                     li
                         p
                             span Trabajo:
@@ -25,7 +25,7 @@ block content
                     li
                         p
                             span E-mail:
-                            b hecav@gmail.com
+                            b #{user.email}
                 .col-md-12.text-center
                     button.site-btn.icon
                         a(href='/salir', style='color: #000; margin-right:10px;') Cerrar Sesión

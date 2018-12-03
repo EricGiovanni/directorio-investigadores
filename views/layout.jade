@@ -46,8 +46,9 @@ html
                 a.nav-link(href='/registro')
                   strong Registrarse
             if isAuthenticated
+              -var sanitizedName = reqUser.names.replace(/\W/g, '')
               li.nav-item.mx-1
-                a.nav-link(href='/perfil')
+                a.nav-link(href='/perfil/usuario/#{reqUser.id}/#{sanitizedName}')
                   strong Perfil
             if isAuthenticated
               li.nav-item.mx-1
