@@ -1,7 +1,7 @@
-//var map;
+var map;
 
 AmCharts.ready(function() {
-    var map = new AmCharts.AmMap();
+    map = new AmCharts.AmMap();
     map.colorSteps = 10;
     $.ajax({
         url: 'http://localhost:3000/estados',
@@ -13,6 +13,9 @@ AmCharts.ready(function() {
 
     function makeMap(result){
       var temp = [];
+      var abrev_states=['AGU','BCN','BCS','CAM','CHP','CHH','COA','COL','CDMX','DUR','GUA','GRO',
+                        'HID','JAL','MEX','MIC','MOR','NAY','NLE','OAX','PUE','QUE',
+                        'ROO','SLP','SIN','SON','TAB','TAM','TLA','VER','YUC','ZAC'];
       for(var i in result){
         temp.push({id: 'MX-'+result[i].State, value: result[i].ResearcherCount*200000 });
       }
