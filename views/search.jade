@@ -16,6 +16,7 @@ block content
             hr
             div.list-group
                 each institution in institutions
-                    a.list-group-item.list-group-item-action #{institution.name}
+                    -var instUrl = '/perfil/'+'/institucion/'+institution.id+'/'+institution.name.replace(/\W/g, '')
+                    a.list-group-item.list-group-item-action(href='#{instUrl}') #{institution.name}
         
         
