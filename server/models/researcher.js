@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Researcher = sequelize.define('Researcher', {
     CV: DataTypes.STRING,
+    about_me: DataTypes.TEXT,
     user_id: {
         type: DataTypes.INTEGER,
         references: 'user',

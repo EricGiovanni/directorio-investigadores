@@ -5,7 +5,7 @@ module.exports = {
     create(req, res) {
         return State
             .create({
-                nombre: req.body.nombre,
+                name: req.body.name,
                 abbr: req.body.abbr,
                 country_id: req.body.country_id,
                 createdAt: new Date(),
