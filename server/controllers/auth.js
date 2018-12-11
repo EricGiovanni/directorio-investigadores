@@ -1,5 +1,7 @@
 var db = require("../models/index");
 const User = require('../models/user')(db.sequelize, db.Sequelize);
+const Researcher = require('../models/researcher')(db.sequelize, db.Sequelize);
+const Student = require('../models/student')(db.sequelize, db.Sequelize);
 var bcrypt = require('bcrypt-node');
 const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
@@ -85,8 +87,24 @@ module.exports = {
                     from: process.env.support_email,
                     subject: user.names + ', activa tu cuenta',
                     html: emailHTML,
+                })
+                .then(() => {
+                    if (req.body.accountType == "student") {
+                        Student.create({
+                            user_id: user.id,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                        })
+                    }
+                    else if (req.body.accountType == "researcher") {
+                        Researcher.create({
+                            user_id: user.id,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                        });
+                    }
+                    res.render('login');
                 });
-                res.render('login');
             })
             .catch(error => res.status(400).send(error));
         });
