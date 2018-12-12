@@ -7,45 +7,9 @@ const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
 const path = require('path');
 const randomstring = require("randomstring");
-const { body, validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator/check');
 
 module.exports = {
-    validate(method) {
-        switch (method) {
-            case 'signUp': {
-                    return [
-                        body('names', 'Los nombres son obligatorios.').not().isEmpty(),
-                        body('last_names', 'Los apellidos son obligatorios.').not().isEmpty(),
-                        body('email', 'La dirección de correo electrónico es obligatoria.').not().isEmpty(),
-                        body('email', 'Dirección de correo electrónico inválida.').isEmail(),
-                        body('password', 'La contraseña es obligatoria.').not().isEmpty(),
-                        body('passwordMatch', 'La confirmación de contraseña es '
-                            + 'obligatoria.').not().isEmpty(),
-                        body('accountType', 'El tipo de cuenta solo puede ser '
-                            + '"estudiante" o "investigador".')
-                            .isIn(['student', 'researcher']),
-                        body('email').custom((value) => {
-                            return User.findOne({
-                                where: {
-                                    email: value,
-                                }
-                            })
-                            .then((existingUser) => {
-                                if (existingUser)
-                                    return Promise.reject('El correo electrónico '
-                                        + 'ya ha sido registrado');
-                            });
-                        }),
-                        body('password').custom((value, { req }) => {
-                            if (value != req.body.passwordMatch)
-                                return Promise.reject('Las contraseñas no coinciden');
-                            return Promise.resolve();
-                        }),
-                    ]
-                }
-                break;
-        }
-    },
     logInIndex(req, res) {
         if (req.isAuthenticated())
             res.redirect('/')
@@ -53,27 +17,35 @@ module.exports = {
             res.render('login');
     },
     logIn(req, res) {
-        User.findOne({
-            where: {
-                email: req.body.email,
-            },
-        })
-        .then((user) => {
-            if (user === null || !bcrypt.compareSync(req.body.password, user.password))
-                res.render('login', {
-                    error: 'El correo electrónico o la contraseña son incorrectos'
-                });
-            else if (user.approved == false) {
-                res.render('login', {
-                    error: 'La cuenta no ha sido confirmada, verifica tu bandeja de'
-                        + ' correo electrónico'
-                });
-            }
-            else
-                req.login(user, function(err) {
-                    res.redirect('/');
-                });
-        });
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.render('login', {
+                errors: errors.array()
+            });
+        }
+        else {
+            User.findOne({
+                where: {
+                    email: req.body.email,
+                },
+            })
+            .then((user) => {
+                if (user === null || !bcrypt.compareSync(req.body.password, user.password))
+                    res.render('login', {
+                        error: 'El correo electrónico o la contraseña son incorrectos'
+                    });
+                else if (user.approved == false) {
+                    res.render('login', {
+                        error: 'La cuenta no ha sido confirmada, verifica tu bandeja de'
+                            + ' correo electrónico'
+                    });
+                }
+                else
+                    req.login(user, function(err) {
+                        res.redirect('/');
+                    });
+            });
+        }
     },
     signUpIndex(req, res) {
         if (req.isAuthenticated())
