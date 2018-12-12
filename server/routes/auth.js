@@ -8,7 +8,7 @@ router.post('/acceso', authRouter.logIn);
 router.get('/salir',authRouter.logOut);
 
 router.get('/registro', authRouter.signUpIndex);
-router.post('/registro', authRouter.signUp);
+router.post('/registro', authRouter.validate('signUp'), authRouter.signUp);
 
 router.get('/confirmacion/:ficha', authRouter.confirmation);
 

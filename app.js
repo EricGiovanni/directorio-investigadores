@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
+var expressValidator = require('express-validator')
+var bodyParser = require('body-parser')
 require('dotenv').load();
 
 var indexRouter = require('./server/routes/index');
@@ -46,6 +48,10 @@ app.use(function(req,res,next){
   res.locals.reqUser = req.user;
   next();
 });
+
+app.use(bodyParser.json());
+app.use(expressValidator());
+
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/busqueda', searchRouter);
