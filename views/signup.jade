@@ -1,6 +1,13 @@
 extends layout
 
 block content
+
+    if errors
+        .container
+            .alert.alert-danger
+                for error in errors
+                  p #{error.msg}
+
     .container
         h5 Registrarse
         form(action="/registro" method="post" id='signUpForm')
