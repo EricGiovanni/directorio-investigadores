@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var authRouter = require("../controllers/auth.js");
 var signUpSchema = require("../validations/signup.js");
+var logInSchema = require("../validations/login.js");
 
 router.get('/acceso', authRouter.logInIndex);
-router.post('/acceso', authRouter.logIn);
+router.post('/acceso', logInSchema, authRouter.logIn);
 
 router.get('/salir',authRouter.logOut);
 

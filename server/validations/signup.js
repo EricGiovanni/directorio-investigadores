@@ -22,8 +22,9 @@ module.exports = checkSchema({
     email: {
         in: ['body'],
         errorMessage: 'Dirección de correo electrónico inválida',
-        isEmail: true,
         trim: true,
+        isEmail: true,
+        normalizeEmail: true,
         custom: {
             options: (value) => {
                 return User.findOne({

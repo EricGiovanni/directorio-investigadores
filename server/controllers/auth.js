@@ -17,27 +17,35 @@ module.exports = {
             res.render('login');
     },
     logIn(req, res) {
-        User.findOne({
-            where: {
-                email: req.body.email,
-            },
-        })
-        .then((user) => {
-            if (user === null || !bcrypt.compareSync(req.body.password, user.password))
-                res.render('login', {
-                    error: 'El correo electrónico o la contraseña son incorrectos'
-                });
-            else if (user.approved == false) {
-                res.render('login', {
-                    error: 'La cuenta no ha sido confirmada, verifica tu bandeja de'
-                        + ' correo electrónico'
-                });
-            }
-            else
-                req.login(user, function(err) {
-                    res.redirect('/');
-                });
-        });
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.render('login', {
+                errors: errors.array()
+            });
+        }
+        else {
+            User.findOne({
+                where: {
+                    email: req.body.email,
+                },
+            })
+            .then((user) => {
+                if (user === null || !bcrypt.compareSync(req.body.password, user.password))
+                    res.render('login', {
+                        error: 'El correo electrónico o la contraseña son incorrectos'
+                    });
+                else if (user.approved == false) {
+                    res.render('login', {
+                        error: 'La cuenta no ha sido confirmada, verifica tu bandeja de'
+                            + ' correo electrónico'
+                    });
+                }
+                else
+                    req.login(user, function(err) {
+                        res.redirect('/');
+                    });
+            });
+        }
     },
     signUpIndex(req, res) {
         if (req.isAuthenticated())
