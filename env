@@ -1,0 +1,8 @@
+NODE_ENV=development
+HOST=127.0.0.1
+PORT=3000
+database_name=research_directory
+database_username=root
+database_password=toor
+support_email=directorio.soporte@gmail.com
+sendgrid_api_key=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
